@@ -1,49 +1,49 @@
 import tkinter as tk
 from tkinter import messagebox
 
-class VistaMillas:
+class VistaOperacion:
     def __init__(self, interfazPrincipal):
-        self.km=None
+        self.num=None
         self.ventana= interfazPrincipal
        
         
     def obtenerDatos(self):
-        self.ventana.title("CALCULADOR DE KM A MILLAS")
+        self.ventana.title("CONVERTIDOR HORAS A MINUTOS")
         self.ventana.geometry("700x800")
-        self.ventana.config(bg= "#e8fdff", height=500, width=500 ) 
-        labeldescripcion=tk.Label(self.ventana, text="ESTE PROGRAMA ESTA DISEÑADO PARA CONVERTIR KM A MILLAS", font=("Comic Sans MS", 12))
-        labeldescripcion.config(bg="#e8fdff")
+        self.ventana.config(bg= "#ffdbd7", height=500, width=500 ) 
+        labeldescripcion=tk.Label(self.ventana, text="ESTE PROGRAMA ESTA DISEÑADO PARA CONVERTIR HORAS EN MINUTOS", font=("Comic Sans MS", 12))
+        labeldescripcion.config(bg="#ffdbd7")
         labeldescripcion.pack(pady=10)
         labeldescripcion=tk.Label(self.ventana, text="A continuacion ingresa los valores que se requieren ", font=("Comic Sans MS", 12))
-        labeldescripcion.config(bg="#e8fdff")
+        labeldescripcion.config(bg="#ffdbd7")
         labeldescripcion.pack(pady=10)
-        ##label km
-        labelkm=tk.Label(self.ventana, text="Ingresa los kilometros para convertir a millas \n", font=("Comic Sans MS", 15))
-        labelkm.config(bg="#a69785", relief="raised")
-        labelkm.pack(pady=10)
-        ##entry km
-        self.km=tk.Entry(self.ventana)
-        self.km.pack(pady=10)
+        ##label 
+        label=tk.Label(self.ventana, text="Ingresa el numero de horas que quieres convertir en minutos:  \n", font=("Comic Sans MS", 15))
+        label.config(bg="#ce7095", relief="raised")
+        label.pack(pady=10)
+        ##entry 
+        self.num=tk.Entry(self.ventana)
+        self.num.pack(pady=10)
         
         self.buttonCalculador=tk.Button(self.ventana, text="CONVERTIR", command=self.verificarDatos)
-        self.buttonCalculador.config(bg="#a69785", relief="raised")
+        self.buttonCalculador.config(bg="#ce7095", relief="raised")
         self.buttonCalculador.pack(pady=10)
         return self.ventana
     def controlador(self,Controlador):
         self.controlador=Controlador
     def verificarDatos(self):
-        if not self.km.get() :
+        if not self.num.get() :
             messagebox.showerror("Error")
         else: 
-            if self.km.get().isdigit() :
-                calcularDatos=[self.km.get()]
+            if self.num.get().isdigit() :
+                calcularDatos=[self.num.get()]
                 self.controlador.procesamientoDatos(calcularDatos)  
             else:
                 messagebox.showerror("error, numeros ingresados no validos para ejecutar la operacion") 
                 
 #Utilice isdigit para comprobar si el nuevo valor es un número o si el campo está vacío (permitiendo la eliminación de caracteres).
-    def mostrarDatos(self, millas):
+    def mostrarDatos(self, rta):
         self.buttonCalculador.config(state="disabled")
-        labelRta=tk.Label(self.ventana, text=f"LOS KM CONVERTIDOS A MILLAS DAN UN RESULTADO DE  :{millas[1]} MILLAS.", font=("Comic Sans MS", 15) )
-        labelRta.config(bg="#eee9e5", relief="raised")
+        labelRta=tk.Label(self.ventana, text=f" HORAS INGRESADAS CONVERTIDAS EN :{rta[1]} MINUTOS", font=("Comic Sans MS", 15) )
+        labelRta.config(bg="#ce7095", relief="raised")
         labelRta.pack(pady=10)
